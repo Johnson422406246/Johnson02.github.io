@@ -1,449 +1,494 @@
-
-
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掌龙蜂擎｜黄金外汇量化交易服务商</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 30px;
-            min-height: 100vh;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
         }
         
-        .course-schedule {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: white;
+            padding: 0 20px;
         }
         
-        .header {
-            background: linear-gradient(to right, #1a237e, #283593);
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 30px;
+            padding: 60px 0 40px;
             text-align: center;
         }
         
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .header .subtitle {
-            font-size: 18px;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .days-navigation {
-            display: flex;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .day-tab {
-            flex: 1;
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .day-tab.active {
-            background-color: white;
-            border-bottom: 3px solid #1a237e;
-            color: #1a237e;
-        }
-        
-        .day-content {
-            padding: 30px;
-            display: none;
-        }
-        
-        .day-content.active {
-            display: block;
-        }
-        
-        .day-theme {
-            color: #1a237e;
-            font-size: 22px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e9ecef;
-            font-weight: 600;
-        }
-        
-        .session {
-            margin-bottom: 30px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .session-header {
-            background-color: #1a237e;
-            color: white;
-            padding: 15px 20px;
-            font-size: 18px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-        
-        .session-header .time {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            margin-left: auto;
-        }
-        
-        .session-content {
-            padding: 20px;
-        }
-        
-        .topic {
-            padding: 12px 0;
-            border-bottom: 1px dashed #dee2e6;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .topic:last-child {
-            border-bottom: none;
-        }
-        
-        .topic-icon {
-            width: 24px;
-            height: 24px;
-            background-color: #1a237e;
-            border-radius: 50%;
+        .logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-            color: white;
-            font-size: 12px;
-            margin-top: 2px;
+            margin-bottom: 20px;
         }
         
-        .topic-text {
-            flex: 1;
-            line-height: 1.5;
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #4dc0ff;
+        }
+        
+        .logo-text h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-text .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 25px auto 0;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #4dc0ff;
+        }
+        
+        /* 主要内容区 */
+        .intro {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4dc0ff;
+            display: inline-block;
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: #555;
         }
         
         .highlight {
-            background-color: #fff3cd;
-            padding: 4px 8px;
-            border-radius: 4px;
+            color: #e63946;
             font-weight: 600;
-            color: #856404;
-            font-size: 14px;
-            margin-left: 8px;
         }
         
-        .key-points {
-            background-color: #e8f4fd;
-            border-left: 4px solid #2196f3;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 0 8px 8px 0;
+        /* 核心业务区 */
+        .services {
+            padding: 40px 0 60px;
+            background-color: #f1f8ff;
         }
         
-        .key-points h3 {
-            color: #0d47a1;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #2a5298;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.6rem;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .service-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+        }
+        
+        .feature-list li {
             margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
         }
         
-        .key-points ul {
-            padding-left: 20px;
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2ecc71;
+            font-weight: bold;
         }
         
-        .key-points li {
-            margin-bottom: 8px;
+        /* 优势区 */
+        .advantages {
+            padding: 60px 0;
         }
         
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .advantage-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .advantage-icon {
+            font-size: 2.2rem;
+            color: #4dc0ff;
+            margin-bottom: 20px;
+        }
+        
+        .advantage-title {
+            font-size: 1.4rem;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        /* 行动号召区 */
+        .cta {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #4dc0ff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2aa3e6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(77, 192, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: #1e3c72;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #0d1b3e;
+            color: white;
+            padding: 40px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4dc0ff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-text {
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* 响应式调整 */
         @media (max-width: 768px) {
-            .days-navigation {
-                flex-direction: column;
+            .logo-text h1 {
+                font-size: 2rem;
             }
             
-            .day-content {
-                padding: 20px;
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .services-grid, .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="course-schedule">
-        <div class="header">
-            <h1>掌龙蜂擎量化系统实战训练营</h1>
-            <div class="subtitle">从0到1掌握量化交易全流程，打造从技术执行到商业变现的闭环能力</div>
-        </div>
-        
-        <div class="days-navigation">
-            <div class="day-tab active" data-day="day1">第一天：基础奠基</div>
-            <div class="day-tab" data-day="day2">第二天：系统构建</div>
-            <div class="day-tab" data-day="day3">第三天：商业变现</div>
-        </div>
-        
-        <div id="day1" class="day-content active">
-            <div class="day-theme">主题：工具掌握、核心理论与首日实盘</div>
-            
-            <div class="session">
-                <div class="session-header">
-                    上午：系统搭建与初始化
-                    <div class="time">09:00-12:00</div>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">软件安装、参数配置与账号注册</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">实盘交易环境准备与基础操作</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">3</div>
-                        <div class="topic-text">核心消息面工具与资源网站详解</div>
-                    </div>
+                <div class="logo-text">
+                    <h1>掌龙蜂擎</h1>
+                    <div class="subtitle">黄金外汇量化交易服务专家</div>
                 </div>
             </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    下午：核心交易理论武装
-                    <div class="time">13:30-17:00</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">实战绘图：时区图绘制与分析</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">多周期共振理论与顺势突破交易法</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">3</div>
-                        <div class="topic-text">揭秘"顺势而为"：赢家策略的概率优势</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    晚上：风险初控与实战演练
-                    <div class="time">19:00-21:30</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">风控模型基本原理</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">美盘时段实盘模拟训练 <span class="highlight">实操</span></div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">3</div>
-                        <div class="topic-text">人工智能辅助分析工具入门</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">4</div>
-                        <div class="topic-text">首日交易数据复盘与心态建设</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="key-points">
-                <h3>第一天核心收获：</h3>
-                <ul>
-                    <li>掌握量化交易基础工具与环境配置</li>
-                    <li>理解核心交易理论与概率优势</li>
-                    <li>完成首次实盘模拟与数据复盘</li>
-                    <li>建立基础风险控制意识</li>
-                </ul>
+            <div class="tagline">
+                智能工具 + 系统培训，让量化交易更简单、更赚钱
             </div>
         </div>
-        
-        <div id="day2" class="day-content">
-            <div class="day-theme">主题：硬件升级、策略合成与团队化运作</div>
-            
-            <div class="session">
-                <div class="session-header">
-                    上午：量化交易环境观摩
-                    <div class="time">09:00-12:00</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">实地/视频参观专业量化机房与多屏交易界面</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">真实盈亏案例分析</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    下午：风控与策略基础设施
-                    <div class="time">13:30-17:00</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">风控机房搭建原理与实战案例解析</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    晚上：策略规模化与团队构建
-                    <div class="time">19:00-21:30</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">多策略组合信号源的搭建原理</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">量化交易团队的架构与分工</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">3</div>
-                        <div class="topic-text">专题实操：搭建多策略信号源，并入驻跟单社区实现收益转化 <span class="highlight">核心实操</span></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="key-points">
-                <h3>第二天核心收获：</h3>
-                <ul>
-                    <li>了解专业量化交易环境与硬件配置</li>
-                    <li>掌握风控系统搭建原理</li>
-                    <li>学会构建多策略信号源系统</li>
-                    <li>了解量化团队组建与分工协作</li>
-                    <li>掌握通过跟单社区变现的基本方法</li>
-                </ul>
-            </div>
+    </header>
+
+    <!-- 公司介绍 -->
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">关于我们</h2>
+            <p class="intro-text">
+                掌龙蜂擎是专注于黄金外汇量化交易服务的领先提供商。我们不仅是<span class="highlight">工具供应商</span>，更是<span class="highlight">交易认知赋能者</span>，通过智能软件降低交易成本，通过系统培训打破认知壁垒，让量化交易从"机构专属"变为"每位交易者都能掌握的盈利武器"。
+            </p>
         </div>
-        
-        <div id="day3" class="day-content">
-            <div class="day-theme">主题：模式定位、财富路径与影响力打造</div>
+    </section>
+
+    <!-- 核心业务 -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">核心产品与服务</h2>
+            <p class="intro-text">我们提供覆盖"风控→执行→策略"全环节的专业量化解决方案</p>
             
-            <div class="session">
-                <div class="session-header">
-                    上午：量化交易商业身份定位
-                    <div class="time">09:00-12:00</div>
+            <div class="services-grid">
+                <!-- 产品1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="service-title">EA手工风控面板</h3>
+                    <p class="service-desc">支持MT4/MT5双平台，手工策略+智能风控二合一，兼顾交易员主观判断与自动化风控。</p>
+                    <ul class="feature-list">
+                        <li>灵活管控，多平台适配</li>
+                        <li>智能规避黑天鹅风险</li>
+                        <li>适合半自动交易玩家</li>
+                    </ul>
                 </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">七大发展路径剖析：交易员、信号商、资管方、培训师、工程师、风控师、俱乐部主理人</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">如何从0到1打造盈利性量化交易俱乐部</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    下午：财富目标实现与生态建设
-                    <div class="time">13:30-17:00</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">普通人通过量化交易实现千万级收入的路径规划</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">打造"助教系统"与交易圈层，实现共赢与规模化</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="session">
-                <div class="session-header">
-                    晚上：流量获取与品牌塑造
-                    <div class="time">19:00-21:30</div>
-                </div>
-                <div class="session-content">
-                    <div class="topic">
-                        <div class="topic-icon">1</div>
-                        <div class="topic-text">量化交易KOL的推广方法与内容策略</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">2</div>
-                        <div class="topic-text">腾讯直播间搭建与每日实盘直播流程 <span class="highlight">实操</span></div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">3</div>
-                        <div class="topic-text">"大家来找茬"：直播间互动式信号模型训练</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">4</div>
-                        <div class="topic-text">每日交易计划与总结的公众化呈现</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">5</div>
-                        <div class="topic-text">线下沙龙组织与高阶实训</div>
-                    </div>
-                    <div class="topic">
-                        <div class="topic-icon">6</div>
-                        <div class="topic-text">社交媒体（文案/短视频）精准引流与个人IP塑造</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="key-points">
-                <h3>第三天核心收获：</h3>
-                <ul>
-                    <li>明确个人在量化交易生态中的定位与发展路径</li>
-                    <li>掌握交易俱乐部与生态系统的搭建方法</li>
-                    <li>了解千万级收入的实现路径与策略</li>
-                    <li>学会打造个人交易品牌与流量获取方法</li>
-                    <li>掌握直播间运营与社群维护技巧</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        document.querySelectorAll('.day-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // 移除所有active类
-                document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
                 
-                // 给当前点击的标签和对应内容添加active类
-                this.classList.add('active');
-                const dayId = this.getAttribute('data-day');
-                document.getElementById(dayId).classList.add('active');
+                <!-- 产品2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="service-title">量化机房服务</h3>
+                    <p class="service-desc">提供稳定低延迟的交易环境，特别适合高频交易、套利策略，毫秒级延迟决定成交胜率。</p>
+                    <ul class="feature-list">
+                        <li>低延迟稳定执行</li>
+                        <li>高频交易优化</li>
+                        <li>全年稳定运行保障</li>
+                    </ul>
+                </div>
+                
+                <!-- 产品3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="service-title">算法策略模型</h3>
+                    <p class="service-desc">三大核心策略模块覆盖全市场行情，从震荡到趋势，从小白到高手都能找到合适策略。</p>
+                    <ul class="feature-list">
+                        <li>震荡波段策略 - 区间高抛低吸</li>
+                        <li>超级趋势策略 - 捕捉主升浪行情</li>
+                        <li>订单流顺势突破 - 追踪主力资金</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务优势 -->
+    <section class="advantages">
+        <div class="container">
+            <h2 class="section-title">为什么选择掌龙蜂擎</h2>
+            <p class="intro-text">对比传统量化服务，我们提供更全面、更落地的解决方案</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="advantage-title">工具+认知双交付</h3>
+                    <p>不仅提供软件工具，更教授策略逻辑与参数调整，真正实现"知其然更知其所以然"。</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="advantage-title">灵活组合方案</h3>
+                    <p>产品模块化设计，支持按需组合。策略独立计费，可按行情特点灵活选择搭配。</p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="advantage-title">零门槛入门</h3>
+                    <p>完善的培训体系，即使零基础也能快速上手。从软件操作到行情理解，全链路陪跑。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动号召 -->
+    <section class="cta">
+        <div class="container">
+            <h2>立即开启您的量化交易之旅</h2>
+            <p class="cta-text">
+                早布局量化，早享受"行情红利"。在波动加剧的市场中，量化工具是您的"降维打击"武器。
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-book"></i> 免费领取策略指南
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-calendar-check"></i> 预约1对1咨询
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">掌龙蜂擎量化</div>
+            <p class="footer-text">
+                让量化交易更简单、更赚钱。关注我们，获取更多量化交易干货与市场洞察。
+            </p>
+            <div class="contact-info">
+                <p>服务咨询 | 产品定制 | 培训合作</p>
+                <p>© 2025 掌龙蜂擎量化服务 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的交互动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有卡片添加点击效果
+            const cards = document.querySelectorAll('.service-card, .advantage-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if(targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // 服务卡片悬停增强效果
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                const icon = card.querySelector('.service-icon');
+                card.addEventListener('mouseenter', function() {
+                    icon.style.transform = 'scale(1.1)';
+                    icon.style.transition = 'transform 0.3s ease';
+                });
+                card.addEventListener('mouseleave', function() {
+                    icon.style.transform = 'scale(1)';
+                });
             });
         });
     </script>
